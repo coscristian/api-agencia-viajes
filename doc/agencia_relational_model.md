@@ -1,5 +1,5 @@
 ## Agencia de viajes Relational Model
-<div hidden>
+
 ``` plantuml
 @startuml
 entity Turista {
@@ -298,5 +298,3 @@ Vuelo ||--|{ Tiene
 Plaza }|--|| Tiene
 @endluml
 ```
-</div>
-![](firstDiagram.svg)
