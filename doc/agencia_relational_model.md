@@ -1,7 +1,7 @@
 ## Agencia de viajes Relational Model
-
+<div hidden>
 ``` plantuml
-
+@startuml
 entity Turista {
     * codigo: varchar(10) <<PK>>
     --
@@ -296,5 +296,7 @@ Viaje }o--o{ ContrataUna
 Plaza }o--o{ ContrataUna
 Vuelo ||--|{ Tiene
 Plaza }|--|| Tiene
+@endluml
 ```
-
+</div>
+![](firstDiagram.svg)
