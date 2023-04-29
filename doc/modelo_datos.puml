@@ -1,0 +1,75 @@
+@startuml
+class Turista {
+    - String codigo
+    - String nombre
+    - String apellidos
+    - String telefono
+    - Boolean activo
+    - Integer idCalle
+    + set()
+    + get()
+}
+
+class Sucursal {
+    - Integer codigo
+    - String telefono
+    - Boolean activo
+    + setTelefono()
+    + setEstado()
+    + getCodigo()
+    + getTelefono()
+    + getEstado()
+}
+
+class Vendedor {
+    - String codigo
+    - String nombre
+    - String apellidos
+    - String telefono
+    - Boolean activo
+    + set()
+    + get()
+}
+
+class AdminGeneral {
+    - String codigo
+    - String nombre
+    - String apellidos
+    - String telefono
+    - Boolean activo
+    - Integer idCalle
+    + set()
+    + get()
+}
+
+class AdminSucursal {
+    - String codigo
+    - String nombre
+    - String apellidos
+    - String telefono
+    - Boolean activo
+    + set()
+    + get()
+}
+
+class Hotel {
+    - String codigo
+    - String nombre
+    - String telefono
+    - Integer plazasDisponibles
+    - Boolean activo
+    + getCodigo()
+    + getNombre()
+    + getTelefono()
+    + getPlazasDisponibles()
+    + getEstado()
+    + setNombre()
+    + setTelefono()
+    + setEstado()
+}
+
+
+
+
+
+@enduml

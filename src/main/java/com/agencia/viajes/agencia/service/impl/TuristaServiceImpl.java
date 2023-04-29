@@ -31,8 +31,8 @@ public class TuristaServiceImpl implements TuristaService {
      */
 
     public TuristaServiceImpl(){
-        this.turistas.add(new TuristaDto("1087489628", "Cristian","Quesada Cossio", "3207101556"));
-        this.turistas.add(new TuristaDto("35586755", "Yuldavis", "Cossio Perea", "3104131241"));
+        this.turistas.add(new TuristaDto("1087489628", "Cristian","Quesada Cossio", "3207101556", 1));
+        this.turistas.add(new TuristaDto("35586755", "Yuldavis", "Cossio Perea", "3104131241", 2));
         
         this.sucursales.add(new SucursalDto(1, "3212458"));
         this.sucursales.add(new SucursalDto(2, "3465874"));
