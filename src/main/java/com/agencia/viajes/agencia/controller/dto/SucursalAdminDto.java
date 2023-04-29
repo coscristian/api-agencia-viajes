@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class SucursalAdmin {
+public class SucursalAdminDto {
     private String codigo;
     private String nombre, apellidos, telefono;
 }

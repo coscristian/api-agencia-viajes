@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Hotel {
+public class HotelDto {
     private Integer codigo;
     private String nombre;
     private String telefono;
