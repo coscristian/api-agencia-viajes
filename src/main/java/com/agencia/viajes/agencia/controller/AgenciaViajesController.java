@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.agencia.viajes.agencia.controller.dto.TuristaDto;
-import com.agencia.viajes.agencia.repository.TuristaRepository;
+import com.agencia.viajes.agencia.exception.ResourceNotFoundException;
 
 // Spring MVC
 /*
@@ -25,10 +25,7 @@ public class AgenciaViajesController {
 
     List<TuristaDto> turistas = new ArrayList<>();
 
-    private TuristaRepository turistaRepository;
-
-    public AgenciaViajesController(TuristaRepository turistaRepository){
-        this.turistaRepository = turistaRepository;
+    public AgenciaViajesController(){
         this.turistas.add(new TuristaDto("1087489628", "Cristian","Quesada Cossio", "3207101556"));
         this.turistas.add(new TuristaDto("35586755", "Yuldavis", "Cossio Perea", "3104131241"));
     }
@@ -44,9 +41,9 @@ public class AgenciaViajesController {
             var turista = turistas.stream()
             .filter(t -> t.getCodigo().equals(cod))
             .findFirst()
-            .orElseThrow(() -> new RuntimeException("Turista no existe"));    
+            .orElseThrow(() -> new ResourceNotFoundException("Turista no existe"));    
             return turista.getNombre();
-        } catch (Exception e) {
+        } catch (ResourceNotFoundException e) {
             return e.getMessage();
         }
     }
