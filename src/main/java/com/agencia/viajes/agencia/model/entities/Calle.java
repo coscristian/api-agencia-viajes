@@ -7,28 +7,19 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import lombok.AccessLevel;
 import lombok.Data;
-import lombok.Setter;
 
-@Entity
-@Table(name = "Hotel")
 @Data
-public class Hotel {
+@Table(name = "Calle")
+@Entity
+public class Calle {
     @Id
-    @Setter(AccessLevel.NONE)
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer codigo;
+    private Integer id;
 
     @Column(name = "nombre", nullable = false, length = 25)
     private String nombre;
 
-    @Column(name = "telefono", nullable = false, length = 10)
-    private String telefono;
-
-    @Column(name = "plazas_disponibles", nullable = false)
-    private Integer plazasDisponibles;
-
     @ManyToOne
-    private Calle idCalle;
+    private Ciudad ciudad;
 }
