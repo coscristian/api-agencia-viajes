@@ -33,4 +33,10 @@ public class Sucursal {
 
     @OneToMany
     private List<VentaContratacion> ventaContrataciones;
+
+    @OneToMany
+    private List<Contrata> contratos;
+
+    @OneToMany
+    private List<ContratacionRealizaViaje> contratacionRealizaViajes;
 }

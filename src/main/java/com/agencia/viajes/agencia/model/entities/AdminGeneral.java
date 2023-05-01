@@ -43,4 +43,7 @@ public class AdminGeneral {
     @OneToMany
     private List<CreacionAdminSucursal> creacionAdminSucursales;
 
+    @OneToMany
+    private List<CreacionHotel> creacionHoteles;
+
 }

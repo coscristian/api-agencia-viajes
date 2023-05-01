@@ -38,4 +38,10 @@ public class Turista {
 
     @OneToMany
     private List<VentaContratacion> ventaContrataciones;
+
+    @OneToMany
+    private List<Turista> turistas;
+
+    @OneToOne
+    private ContratacionRealizaViaje contratacionRealizaViaje;
 }

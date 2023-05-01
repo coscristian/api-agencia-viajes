@@ -6,6 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AccessLevel;
 import lombok.Data;
@@ -29,6 +30,12 @@ public class Hotel {
     @Column(name = "plazas_disponibles", nullable = false)
     private Integer plazasDisponibles;
 
+    @Column(name = "activo", nullable = false)
+    private Boolean activo;
+
     @ManyToOne
     private Calle idCalle;
+
+    @OneToOne
+    private CreacionHotel creacionHotel;
 }
