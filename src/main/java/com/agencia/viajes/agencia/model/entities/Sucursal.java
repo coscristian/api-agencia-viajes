@@ -30,4 +30,7 @@ public class Sucursal {
 
     @OneToMany
     private List<AdminTrabajaSucursal> adminTrabajaSucursal;
+
+    @OneToMany
+    private List<VentaContratacion> ventaContrataciones;
 }
