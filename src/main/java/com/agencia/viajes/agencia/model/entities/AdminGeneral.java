@@ -5,7 +5,6 @@ import java.util.List;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
@@ -37,5 +36,11 @@ public class AdminGeneral {
 
     @OneToMany
     private List<AsignacionTrabajoVendedor> asignacionTrabajoVendedor;
+
+    @OneToMany
+    private List<AsignacionTrabajoAdminSucursal> asignacionTrabajoAdminSucursal;
+
+    @OneToMany
+    private List<CreacionAdminSucursal> creacionAdminSucursales;
 
 }

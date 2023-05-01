@@ -28,4 +28,6 @@ public class Vendedor {
     @OneToOne
     AsignacionTrabajoVendedor asignacionTrabajoVendedor;
 
+    
+
 }
