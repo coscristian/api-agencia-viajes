@@ -28,6 +28,9 @@ public class Turista {
     @Column(name = "telefono", nullable = false, length = 10)
     private String telefono;
 
+    @Column(name = "activo", nullable = false)
+    private Boolean activo;
+
     @ManyToOne
     @JoinColumn(name = "id_calle", referencedColumnName = "id")
     private Calle calle;

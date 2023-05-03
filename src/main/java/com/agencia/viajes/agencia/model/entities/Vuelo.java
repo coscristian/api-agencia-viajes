@@ -35,6 +35,7 @@ public class Vuelo {
     @JoinColumn(name = "id_aeropuerto_salida", referencedColumnName = "id")
     private Aeropuerto aeropuertoSalida;
 
+    @ManyToOne
     @JoinColumn(name = "id_aeropuerto_llegada", referencedColumnName = "id")
     private Aeropuerto aeropuertoLlegada;
 

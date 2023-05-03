@@ -1,5 +1,7 @@
 package com.agencia.viajes.agencia.model.entities;
 
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -27,5 +29,5 @@ public class Aeropuerto {
     private String codigoIata;
 
     @OneToMany(mappedBy = "aeropuertoSalida")
-    private Vuelo vuelo;
+    private List<Vuelo> vuelo;
 }
