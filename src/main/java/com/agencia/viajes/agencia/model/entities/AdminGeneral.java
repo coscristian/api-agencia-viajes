@@ -31,9 +31,6 @@ public class AdminGeneral {
     @Column(name = "activo", nullable = false)
     private Boolean activo;
 
-    //@ManyToOne
-    //private Calle calle;
-
     @OneToMany(mappedBy = "adminGeneral")
     private List<TrabajoVendedor> trabajoVendedor;
 
@@ -52,30 +49,4 @@ public class AdminGeneral {
 
     @OneToMany(mappedBy = "adminGeneral")
     private List<TrabajoAdminSucursal> trabajosAdminSucursal;
-
-    /*
-    @OneToMany 
-    private List<Vendedor> vendedores;
-
-    @OneToMany
-    private List<AdminSucursal> adminSucursales;
-
-    @OneToMany
-    private List<Hotel> hoteles;
-
-    @OneToMany
-    private List<CreacionVendedor> creacionVendedor;
-
-    @OneToMany
-    private List<AsignacionTrabajoVendedor> asignacionTrabajoVendedor;
-
-    @OneToMany
-    private List<AsignacionTrabajoAdminSucursal> asignacionTrabajoAdminSucursal;
-
-    @OneToMany
-    private List<CreacionAdminSucursal> creacionAdminSucursales;
-
-    @OneToMany
-    private List<CreacionHotel> creacionHoteles;
- */
 }

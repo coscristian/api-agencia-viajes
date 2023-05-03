@@ -43,8 +43,4 @@ public class TrabajoVendedor {
 
 }
 
-/**
- *     @Id
-    @Setter(AccessLevel.NONE)
-    @GeneratedValue(strategy = GenerationType.AUTO)
- */
+
