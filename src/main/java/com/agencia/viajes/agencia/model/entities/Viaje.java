@@ -1,40 +1,35 @@
 package com.agencia.viajes.agencia.model.entities;
 
 import java.util.Date;
+import java.util.List;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import lombok.AccessLevel;
 import lombok.Data;
 import lombok.Setter;
-import lombok.AccessLevel;
-
 
 @Entity
 @Table(name = "Viaje")
 @Data
 public class Viaje {
-    
+    @Id
     @Setter(AccessLevel.NONE)
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer codigo;
 
-    @Column(name = "fecha_inicio", nullable = false)
     private Date fechaInicio;
 
-    @Column(name = "fecha_fin", nullable = false)
     private Date fechaFin;
 
-    @Column(name = "precio_total", nullable = false)
-    private Float precioTotal;
+    @OneToMany(mappedBy = "viaje")
+    private List<Contratacion> contrataciones;
 
-    @OneToOne
-    private ContratacionRealizaViaje contratacionRealizaViaje;
-
-    @OneToOne
-    private ContrataUna contrataUna;
+    @OneToMany(mappedBy = "viaje")
+    private List<Plaza> plazas;
+    
 }

@@ -5,6 +5,8 @@ import java.util.List;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
@@ -14,6 +16,7 @@ import lombok.Data;
 @Data
 public class AdminGeneral {
     @Id
+    @Column(name = "codigo")
     private String codigo;
 
     @Column(name = "nombre", nullable = false, length = 25)
@@ -28,8 +31,37 @@ public class AdminGeneral {
     @Column(name = "activo", nullable = false)
     private Boolean activo;
 
-    @Column(name = "id_calle")
-    private Integer idCalle;
+    //@ManyToOne
+    //private Calle calle;
+
+    @OneToMany(mappedBy = "adminGeneral")
+    private List<TrabajoVendedor> trabajoVendedor;
+
+    @OneToMany(mappedBy = "adminGeneral")
+    private List<Vendedor> vendedores;
+
+    @OneToMany(mappedBy = "adminGeneral")
+    private List<AdminSucursal> administradoresSucursales;
+
+    @ManyToOne
+    @JoinColumn(name = "id_calle", referencedColumnName = "id")
+    private Calle calle;
+
+    @OneToMany(mappedBy = "adminGeneral")
+    private List<Hotel> hoteles;
+
+    @OneToMany(mappedBy = "adminGeneral")
+    private List<TrabajoAdminSucursal> trabajosAdminSucursal;
+
+    /*
+    @OneToMany 
+    private List<Vendedor> vendedores;
+
+    @OneToMany
+    private List<AdminSucursal> adminSucursales;
+
+    @OneToMany
+    private List<Hotel> hoteles;
 
     @OneToMany
     private List<CreacionVendedor> creacionVendedor;
@@ -45,5 +77,5 @@ public class AdminGeneral {
 
     @OneToMany
     private List<CreacionHotel> creacionHoteles;
-
+ */
 }

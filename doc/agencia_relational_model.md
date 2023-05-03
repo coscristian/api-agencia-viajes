@@ -12,26 +12,24 @@ entity Turista {
 }
 
 /' Relación: Turista contrata sucursal '/
-entity Contrata {
+entity Contratación {
     * cod_sucursal: Integer <<PK>>
     * cod_turista: varchar(10) <<PK>>
     * fecha_contratación: Date <<PK>> /'Permite que un turista contrate la misma sucursal en diferentes contrataciones en diferentes fechas'/
     --
-    cod_sucursal <<FK>> REFERENCES Sucursal(codigo)
-    cod_turista <<FK>> REFERENCES Turista(codigo)
-}
-
-entity ContratacionRealizaViaje {
-    * cod_viaje: Integer <<PK>>
-    * cod_sucursal: Integer <<PK>>
-    * cod_turista: Integer <<PK>>
-    * fecha_contrato_sucursal: Date <<PK>>
-    --
-    fecha_contrato_viaje: Date
-    FOREIGN KEY (cod_viaje) REFERENCES Viaje(codigo)
+    * cod_vendedor: varchar(10)
+    * fecha_venta: Date
+    * cod_viaje: Integer
+    * cod_hotel: Integer
+    * id_regimen: Integer
+    * fecha_llegada_hospedaje
+    * fecha_salida_hospedaje
     FOREIGN KEY (cod_sucursal) REFERENCES Sucursal(codigo)
     FOREIGN KEY (cod_turista) REFERENCES Turista(codigo)
-    FOREIGN KEY (cod_sucursal, cod_turista, fecha_contrato_sucursal) REFERENCES Contrata(cod_sucursal, cod_turista, fecha_contratacion)
+    FOREIGN KEY (cod_vendedor) REFERENCES Vendedor(codigo)
+    FOREIGN KEY (cod_viaje) REFERENCES Viaje(codigo)
+    FOREIGN KEY (id_regimen) REFERENCES Regimen(id)
+    FOREIGN KEY (cod_hotel, id_regimen) REFERENCES ContratoHospedaje(cod_hotel, id_regimen)
 }
 
 entity Vendedor {
@@ -40,27 +38,16 @@ entity Vendedor {
     * nombre: varchar(25)
     * apellidos: varchar(25)
     * telefono: varchar(10)
+    * cod_sucursal: Integer
+    * cod_admin_general: varchar(10)
+    FOREIGN KEY(cod_sucursal) REFERENCES Sucursal(codigo)
+    FOREIGN KEY(cod_admin_general) REFERENCES AdminGeneral(codigo)
+    
 }
 
-entity VentaContratación {
-    * cod_vendedor: varchar(10) <<PK>>
-    * cod_sucursal: Integer <<PK>>
-    * cod_turista: Integer <<PK>>
-    --
-    * fecha_venta: Date
-    FOREIGN KEY (cod_vendedor) REFERENCES Vendedor(codigo)
-    FOREIGN KEY (cod_sucursal) REFERENCES Sucursal(codigo)
-    FOREIGN KEY (cod_turista) REFERENCES Turista(codigo)
-}
-
-entity VendedorTrabajaSucursal {
-    cod_vendedor: varchar(10) <<PK>>
-    cod_sucursal: Integer <<PK>>
-    --
-    fecha_inicio: Date
-    fecha_fin: Date
-    FOREIGN KEY (cod_vendedor) REFERENCES Vendedor(codigo)
-    FOREIGN KEY (cod_sucursal) REFERENCES Sucursal(codigo)
+entity ContratoHospedaje {
+    * cod_hotel: Integer <<PK>> 
+    * id_regimen: Integer <<PK>>
 }
 
 entity AdminSucursal {
@@ -69,16 +56,35 @@ entity AdminSucursal {
     * nombre: varchar(25)
     * apellidos: varchar(25)
     * telefono: varchar(10)
+    * cod_admin_general: varchar(10)
+    * fecha_creacion: Date
+    FOREIGN KEY (cod_admin_general) REFERENCES AdminGeneral(codigo)
 }
 
-entity AdminTrabajaSucursal {
+entity TrabajoAdminSucursal {
     * cod_admin_sucursal: varchar(10) <<PK>>
     * cod_sucursal: Integer <<PK>>
     --
-    fecha_inicio: Date
+    * fecha_inicio: Date
     fecha_fin: Date
+    * fecha_asignacion: Date
+    * cod_admin_general: varchar(10)
     FOREIGN KEY (cod_admin_sucursal) REFERENCES AdminSucursal(codigo)
     FOREIGN KEY (cod_sucursal) REFERENCES Sucursal(codigo)
+    FOREIGN KEY (cod_admin_general) REFERENCES AdminGeneral(codigo)
+}
+
+entity TrabajoVendedor {
+    * cod_vendedor: varchar(10) <<PK>>
+    * cod_sucursal: Integer <<PK>>
+    --
+    * fecha_inicio: Date
+    fecha_fin: Date
+    * fecha_asignacion: Date
+    * cod_admin_general: varchar(10)
+    FOREIGN KEY (cod_admin_general) REFERENCES AdminGeneral(codigo)
+    FOREIGN KEY (cod_sucursal) REFERENCES Sucursal(codigo)
+    FOREIGN KEY (cod_vendedor) REFERENCES Vendedor(codigo)
 }
 
 entity AdminGeneral {
@@ -91,63 +97,19 @@ entity AdminGeneral {
     FOREIGN KEY (id_calle) REFERENCES Calle(id)
 }
 
-entity CreaciónVendedor {
-    * cod_admin_general: varchar(10) <<PK>>
-    * cod_vendedor: varchar(10) <<PK>>
-    --
-    * fecha_creación: Date
-    FOREIGN KEY (cod_admin_general) REFERENCES AdminGeneral(codigo)
-    FOREIGN KEY (cod_vendedor) REFERENCES Vendedor(codigo)
-}
 
-entity AsignaciónTrabajoVendedor {
-    * cod_admin_general: varchar(10) <<PK>>
-    * cod_vendedor: varchar(10) <<PK>>
-    * cod_sucursal: Integer <<PK>>
-    --
-    * fecha_asignación: Date
-    FOREIGN KEY (cod_admin_general) REFERENCES AdminGeneral(codigo)
-    FOREIGN KEY (cod_vendedor) REFERENCES Vendedor(codigo)
-    FOREIGN KEY (cod_sucursal) REFERENCES Sucursal(codigo)
-}
-
-entity CreaciónAdminSucursal {
-    * cod_admin_general: varchar(10) <<PK>>
-    * cod_admin_sucursal: varchar(10) <<PK>>
-    --
-    * fecha_creación: Date
-    FOREIGN KEY (cod_admin_general) REFERENCES AdminGeneral(codigo)
-    FOREIGN KEY (cod_admin_sucursal) REFERENCES AdminSucursal(codigo)
-}
-
-entity AsignaciónTrabajoAdminSucursal {
-    * cod_admin_general: varchar(10) <<PK>>
-    * cod_admin_sucursal: varchar(10) <<PK>>
-    * cod_sucursal: Integer <<PK>>
-    --
-    * fecha_asignación: Date
-    FOREIGN KEY (cod_admin_general) REFERENCES AdminGeneral(codigo)
-    FOREIGN KEY (cod_admin_sucursal) REFERENCES AdminSucursal(codigo)
-    FOREIGN KEY (cod_sucursal) REFERENCES Sucursal(codigo)
-}
-
-entity CreaciónHotel {
-    * cod_admin_general: varchar(10) <<PK>>
-    * cod_hotel: Integer <<PK>>
-    --
-    * fecha_creación: Date
-    FOREIGN KEY (cod_admin_general) REFERENCES AdminGeneral(codigo)
-    FOREIGN KEY (cod_hotel) REFERENCES Hotel(codigo)
-}
 
 entity Vuelo {
     * numero: Integer <<autonumber>> <<PK>>
     --
     * fecha: Date
-    plazasDisponibles: Integer
-    plazasTurista: Integer
-    plazasEjecutiva: Integer
-    PlazasPrimera: Integer
+    * id_aeropuerto_salida: Integer
+    * id_aeropuerto_llegada: Integer
+    * fecha_salida: Date
+    * fecha_llegada: Date
+    FOREIGN KEY (id_aeropuerto_salida) REFERENCES Aeropuerto(id)
+    FOREIGN KEY (id_aeropuerto_llegada) REFERENCES Aeropuerto(id)
+
 }
 
 entity Aeropuerto {
@@ -157,33 +119,12 @@ entity Aeropuerto {
     * codigo_iata: varchar(5)
 }
 
-entity OrigenVuelo {
-    * num_vuelo: Integer <<PK>>
-    * id_aeropuerto: Integer <<PK>>
-    --
-    * fecha_salida: Date
-    * hora_salida: Datetime
-    FOREIGN KEY (id_aeropuerto) REFERENCES Aerouperto(id)
-    FOREIGN KEY (num_vuelo) REFERENCES Vuelo(numero)
-}
-
-entity DestinoVuelo {
-    * num_vuelo: Integer <<PK>>
-    * id_aeropuerto: Integer <<PK>>
-    --
-    * fecha_llegada: Date
-    * hora_llegada: Datetime
-    FOREIGN KEY (id_aeropuerto) REFERENCES Aerouperto(id)
-    FOREIGN KEY (num_vuelo) REFERENCES Vuelo(numero)
-}
-
 entity Viaje {
     * codigo: Integer <<autonumber>> <<PK>>
     --
     * fecha_inicio: Date
     * fecha_fin: Date
     precio_total: float
-    
 }
 
 entity Calle {
@@ -204,8 +145,11 @@ entity Hotel {
     --
     * nombre: varchar(25)
     * telefono: varchar(25)
+    * cod_admin_general: varchar(10)
     * plazas_disponibles: integer
-    id_calle_fk: Integer <<FK>> REFERENCES Calle(id)
+    * id_calle: Integer 
+    FOREIGN KEY (id_calle) REFERENCES Calle(id)
+    FOREIGN KEY (cod_admin_general) REFERENCES AdminGeneral(codigo)
 }
 
 entity Sucursal {
@@ -221,16 +165,9 @@ entity Regimen {
     * precio: Real   
 }
 
-entity TieneUn {
-    * cod_sucursal: Integer <<PK>>
-    * cod_turista: varchar(10) <<PK>>
-    * fecha_contratación: Date <<PK>> 
-    * id_regimen: Integer
-    --
-    * fecha_llegada: Date
-    * fecha_salida: Date
-    FOREIGN KEY (cod_sucursal, cod_turista, fecha_contratacion) REFERENCES Contrata(cod_sucursal, cod_turista, fecha_contratacion)
-    FOREIGN KEY (id_regimen) REFERENCES Regimen(id_regimen)
+entity HotelTieneRegimen {
+    * cod_hotel: Integer <<PK>>
+    * id_regimen: Integer <<PK>>
 }
 
 entity Plaza {
@@ -238,63 +175,41 @@ entity Plaza {
     --
     * descripcion: varchar(30)
     * precio: Real
-}
-
-entity Tiene {
-    * num_vuelo: Integer <<PK>>
-    * id_plaza: Integer <<PK>>
-    --
-    FOREIGN KEY (num_vuelo) REFERENCES Vuelo(numero)
-    FOREIGN KEY (id_plaza) REFERENCES Plaza(id)
-}
-
-entity ContrataUna {
-    * cod_viaje: Integer <<PK>>
-    * id_plaza: Integer <<PK>>
-    --
+    cod_viaje: Integer
+    cod_vuelo: Integer 
     FOREIGN KEY (cod_viaje) REFERENCES Viaje(codigo)
-    FOREIGN KEY (id_plaza) REFERENCES Plaza(id)
+    FOREIGN KEY (cod_vuelo) REFERENCES Vuelo(codigo)
 }
 
 /' Relaciones '/
-Turista ||--|{ Contrata
-Sucursal ||--|{ Contrata
+AdminGeneral ||--o{ Vendedor
+AdminGeneral ||--o{ TrabajoAdminSucursal
+AdminSucursal ||--|| TrabajoAdminSucursal
+Sucursal ||--|| TrabajoAdminSucursal
+AdminGeneral ||--o{ AdminSucursal
+Contratación ||--|| Viaje
+Viaje ||--o{ Plaza
+AdminGeneral ||--o{ Hotel
+Vuelo ||--|{ Plaza
+Vuelo }o--|| Aeropuerto
+AdminGeneral ||--o{ TrabajoVendedor
+Sucursal ||--o{ TrabajoVendedor
+Vendedor ||--o{ TrabajoVendedor
+Vendedor ||--o{ Contratación
+Turista ||--|{ Contratación
+Sucursal ||--|{ Contratación
+Contratación }o--o| ContratoHospedaje
+Hotel ||--|{ HotelTieneRegimen
+Regimen ||--|{ HotelTieneRegimen
+
 Calle ||--o{ Turista
 Calle }|--|| Ciudad
 Calle ||--o{ Hotel
-ContratacionRealizaViaje ||--|| Viaje
-Vendedor ||--o{ VentaContratación
-Vendedor }o--|| VendedorTrabajaSucursal
-AdminSucursal ||--o| AdminTrabajaSucursal
+Vendedor }o--|| Sucursal
 AdminGeneral }o--|| Calle
-AdminGeneral ||--o{ CreaciónVendedor
-AdminGeneral ||--o{ AsignaciónTrabajoVendedor
-AdminGeneral ||--o{ CreaciónAdminSucursal
-AdminGeneral ||--o{ AsignaciónTrabajoAdminSucursal
-AdminGeneral ||--o{ CreaciónHotel
-Vuelo }o--|| OrigenVuelo
-Vuelo }o--|| DestinoVuelo
-Aeropuerto ||--o{ OrigenVuelo
-Aeropuerto ||--o{ DestinoVuelo
-Turista }o--o{ VentaContratación
-Sucursal ||--o{ VentaContratación
-Sucursal ||--o{ VendedorTrabajaSucursal
-Sucursal ||--o{ AdminTrabajaSucursal
-Vendedor --o{ CreaciónVendedor
-Vendedor }o--|| AsignaciónTrabajoVendedor
-Sucursal }o--|| AsignaciónTrabajoVendedor
-AdminSucursal }o--|| CreaciónAdminSucursal
-AdminSucursal }o--|| AsignaciónTrabajoAdminSucursal
-Sucursal }o--|| AsignaciónTrabajoAdminSucursal
-Hotel }o--|| CreaciónHotel
-Sucursal ||--o{ ContratacionRealizaViaje
-Turista ||--|| ContratacionRealizaViaje
-Contrata ||--o| ContratacionRealizaViaje
-Contrata }o--o| TieneUn
-Regimen |o--o{ TieneUn
-Viaje }o--o{ ContrataUna
-Plaza }o--o{ ContrataUna
-Vuelo ||--|{ Tiene
-Plaza }|--|| Tiene
+
+
+
+
 @endluml
 ```

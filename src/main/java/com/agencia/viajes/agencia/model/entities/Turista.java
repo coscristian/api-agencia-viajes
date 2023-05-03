@@ -5,9 +5,9 @@ import java.util.List;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
 
@@ -16,32 +16,22 @@ import lombok.Data;
 @Data
 public class Turista {
     @Id
-    private String codigo; 
+    @Column(name = "codigo", nullable = false, length = 10)
+    private String codigo;
 
     @Column(name = "nombre", nullable = false, length = 25)
-    private String nombre; 
+    private String nombre;
 
-    @Column(name = "apellidos", nullable = false, length = 40)
+    @Column(name = "apellidos", nullable = false, length = 25)
     private String apellidos;
 
-    @Column(name = "telefono", nullable = true, length = 10)
+    @Column(name = "telefono", nullable = false, length = 10)
     private String telefono;
 
-    @Column(name = "activo", nullable = false)
-    private Boolean activo;
-
-    @Column(name = "id_calle", nullable = false)
-    private Integer idCalle;
-
     @ManyToOne
+    @JoinColumn(name = "id_calle", referencedColumnName = "id")
     private Calle calle;
 
-    @OneToMany
-    private List<VentaContratacion> ventaContrataciones;
-
-    @OneToMany
-    private List<Turista> turistas;
-
-    @OneToOne
-    private ContratacionRealizaViaje contratacionRealizaViaje;
+    @OneToMany(mappedBy = "turista")
+    private List<Contratacion> contrataciones;
 }

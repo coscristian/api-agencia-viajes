@@ -5,11 +5,11 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import lombok.AccessLevel;
 import lombok.Data;
 import lombok.Setter;
-import lombok.AccessLevel;
 
 @Entity
 @Table(name = "Aeropuerto")
@@ -20,15 +20,12 @@ public class Aeropuerto {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    @Column(name = "nombre", nullable = false, length = 25)
+    @Column(name = "nombre", nullable = false, length = 50)
     private String nombre;
 
     @Column(name = "codigo_iata", nullable = false, length = 5)
     private String codigoIata;
 
-    @OneToOne
-    private OrigenVuelo origenVuelo;
-
-    @OneToOne
-    private DestinoVuelo destinoVuelo;
+    @OneToMany(mappedBy = "aeropuertoSalida")
+    private Vuelo vuelo;
 }

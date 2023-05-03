@@ -2,33 +2,30 @@ package com.agencia.viajes.agencia.model.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
-import lombok.Setter;
-import lombok.AccessLevel;
 
 @Entity
 @Table(name = "Plaza")
 @Data
 public class Plaza {
     @Id
-    @Setter(AccessLevel.NONE)
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    @Column(name = "descripcion", nullable = false, length = 30)
+    @Column(name = "descipcion", nullable = false, length = 30)
     private String descripcion;
 
     @Column(name = "precio", nullable = false)
     private Float precio;
 
-    @OneToOne
-    private ContrataUna contrataUn;
+    @ManyToOne
+    @JoinColumn(name = "viaje", referencedColumnName = "codigo")
+    private Viaje viaje;
 
-    @OneToOne
-    private PlazaTieneVuelo plazaTieneVuelo;
+    @ManyToOne
+    @JoinColumn(name = "vuelo", referencedColumnName = "numero")
+    private Vuelo vuelo;
 }

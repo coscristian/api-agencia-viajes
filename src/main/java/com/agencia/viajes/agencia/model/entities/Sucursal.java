@@ -1,42 +1,43 @@
 package com.agencia.viajes.agencia.model.entities;
 
-import lombok.Data;
-import lombok.Setter;
-
 import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import lombok.AccessLevel;
+import lombok.Data;
+import lombok.Setter;
 
 @Entity
+@Table(name = "Sucursal")
 @Data
 public class Sucursal {
+    @Id
     @Setter(AccessLevel.NONE)
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer codigo;
-    
-    @Column(name = "telefono", nullable = false, length = 10)
-    private String telefono;
 
-    @Column(name = "id_ciudad", nullable = false)
-    private Integer idCiudad;
+    @Column(name = "telefono")
+    private String telefono;
 
     @Column(name = "activo", nullable = false)
     private Boolean activo;
 
-    @OneToMany
-    private List<AdminTrabajaSucursal> adminTrabajaSucursal;
+    @OneToMany(mappedBy = "sucursal")
+    private List<TrabajoVendedor> trabajosVendedores;
 
-    @OneToMany
-    private List<VentaContratacion> ventaContrataciones;
+    @OneToMany(mappedBy = "sucursal")
+    private List<Vendedor> vendedores;
 
-    @OneToMany
-    private List<Contrata> contratos;
+    @OneToMany(mappedBy = "sucursal")
+    private List<TrabajoAdminSucursal> trabajosAdminSucursal;
 
-    @OneToMany
-    private List<ContratacionRealizaViaje> contratacionRealizaViajes;
+    @OneToMany(mappedBy = "sucursal")
+    private List<Contratacion> contrataciones;
+
 }

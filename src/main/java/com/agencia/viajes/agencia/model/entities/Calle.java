@@ -2,19 +2,22 @@ package com.agencia.viajes.agencia.model.entities;
 
 import java.util.List;
 
+import org.hibernate.annotations.ManyToAny;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
 
-@Data
-@Table(name = "Calle")
 @Entity
+@Table(name = "Calle")
+@Data
 public class Calle {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -23,10 +26,17 @@ public class Calle {
     @Column(name = "nombre", nullable = false, length = 25)
     private String nombre;
 
+    @OneToMany(mappedBy = "calle")
+    private List<AdminGeneral> adminsGeneral;
+
+    @OneToMany(mappedBy = "calle")
+    private List<Turista> turistas;
+
     @ManyToOne
+    @JoinColumn(name = "id_ciudad", referencedColumnName = "id")
     private Ciudad ciudad;
 
-    @OneToMany
-    private List<Turista> turistas;
+    @OneToMany(mappedBy = "calle")
+    private List<Hotel> hoteles;
 
 }

@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.agencia.viajes.agencia.controller.dto.TuristaDto;
 import com.agencia.viajes.agencia.service.TuristaService;
 
+import lombok.AllArgsConstructor;
+
 // Spring MVC
 /*
  * - @RESTController controla las peticiones de navegación, define un @ResponseBody el cual 
@@ -19,15 +21,12 @@ import com.agencia.viajes.agencia.service.TuristaService;
  * - @GetMapping("ruta") Determina rutas especiales para cada funcionalidad
  */
 
+@AllArgsConstructor
 @RestController
 @RequestMapping("admin")
 public class AgenciaViajesController { 
 
     private TuristaService turistaService;
-
-    public AgenciaViajesController(TuristaService turistaService){
-        this.turistaService = turistaService;
-    }
 
     @GetMapping("/turistas") // Petición de tipo GET a esta ruta
     public List<TuristaDto> getAllTuristas(){
