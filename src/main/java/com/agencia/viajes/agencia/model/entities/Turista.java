@@ -5,8 +5,6 @@ import java.util.List;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
@@ -31,9 +29,11 @@ public class Turista {
     @Column(name = "activo", nullable = false)
     private Boolean activo;
 
-    @ManyToOne
-    @JoinColumn(name = "id_calle", referencedColumnName = "id")
-    private Calle calle;
+    @Column(name = "direccion", nullable = false)
+    private String direccion;
+
+    @Column(name = "ciudad", nullable = false)
+    private String ciudad;
 
     @OneToMany(mappedBy = "turista")
     private List<Contratacion> contrataciones;

@@ -9,5 +9,5 @@ import com.agencia.viajes.agencia.controller.dto.TuristaDto;
 public interface TuristaService {
     List<TuristaDto> getTuristas();
     Optional<TuristaDto> getTuristaById(String id); // Optional evita NULL pointer exception, es un contenedor que permite determinar si existe o no un dato
-
+    void saveTurista(TuristaDto turistaDto);
 }

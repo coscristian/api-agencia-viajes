@@ -12,5 +12,6 @@ public class HotelDto {
     private String nombre;
     private String telefono;
     private Integer plazasDisponibles;
-    private Integer idCalle;
+    private String direccion;
+    private String ciudad;
 }

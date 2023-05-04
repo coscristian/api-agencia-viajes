@@ -28,6 +28,12 @@ public class Sucursal {
     @Column(name = "activo", nullable = false)
     private Boolean activo;
 
+    @Column(name = "direccion", nullable = false)
+    private String direccion;
+
+    @Column(name = "ciudad", nullable = false)
+    private String ciudad;
+
     @OneToMany(mappedBy = "sucursal")
     private List<TrabajoVendedor> trabajosVendedores;
 

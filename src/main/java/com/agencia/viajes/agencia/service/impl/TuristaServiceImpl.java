@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 
 import com.agencia.viajes.agencia.controller.dto.TuristaDto;
+import com.agencia.viajes.agencia.model.entities.Turista;
 import com.agencia.viajes.agencia.model.repository.TuristaRepository;
 import com.agencia.viajes.agencia.service.TuristaService;
 
@@ -19,7 +20,6 @@ public class TuristaServiceImpl implements TuristaService {
      * Aquí se trabaja con las interfaces, las dependencias no se hacen con los objetos concretos (implementaciones), sino con las interfaces
      */
     private final TuristaRepository turistaRepository;
-
     /*
      * SOLID
      * S: (SRP) Responsabilidad Unica -> Una clase va a a tener solo una responsabilidad dentro del sistema.
@@ -35,7 +35,15 @@ public class TuristaServiceImpl implements TuristaService {
         System.out.println(turistas.size());
 
         return turistas.stream()
-                .map(t -> new TuristaDto(t.getCodigo(), t.getNombre(), t.getApellidos(), t.getTelefono(), t.getActivo(), t.getCalle().getId()))
+                .map(t -> TuristaDto.builder()
+                    .codigo(t.getCodigo())
+                    .nombre(t.getNombre())
+                    .apellidos(t.getApellidos())
+                    .direccion(t.getDireccion())
+                    .ciudad(t.getCiudad())
+                    .telefono(t.getTelefono())
+                    .activo(t.getActivo())
+                    .build())
                 .collect(Collectors.toList());
     }
      
@@ -52,6 +60,22 @@ public class TuristaServiceImpl implements TuristaService {
             turista.get().getApellidos(),
             turista.get().getTelefono(),
             turista.get().getActivo(),
-            turista.get().getCalle().getId()));
+            turista.get().getDireccion(),
+            turista.get().getCiudad()
+            ));
+    }
+
+    @Override
+    public void saveTurista(TuristaDto turistaDto) {
+        Turista turistaDb = new Turista();
+        turistaDb.setCodigo(turistaDto.getCodigo());
+        turistaDb.setNombre(turistaDto.getNombre());
+        turistaDb.setApellidos(turistaDto.getApellidos());
+        turistaDb.setTelefono(turistaDto.getTelefono());
+        turistaDb.setActivo(true);
+        turistaDb.setDireccion(turistaDto.getDireccion());
+        turistaDb.setCiudad(turistaDto.getCiudad());
+        turistaDb.setContrataciones(null);
+        turistaRepository.save(turistaDb);
     }
 }

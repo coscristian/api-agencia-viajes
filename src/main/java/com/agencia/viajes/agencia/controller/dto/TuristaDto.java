@@ -1,6 +1,7 @@
 package com.agencia.viajes.agencia.controller.dto;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -9,11 +10,13 @@ import lombok.NoArgsConstructor;
 @Data // Permite generar los setter y getter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class TuristaDto {
     private String codigo;
     private String nombre;
     private String apellidos;
     private String telefono;
     private Boolean activo;
-    private Integer idCalle;
+    private String direccion;
+    private String ciudad;
 }

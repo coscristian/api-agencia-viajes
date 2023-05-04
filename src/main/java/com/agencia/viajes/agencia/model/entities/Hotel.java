@@ -30,9 +30,11 @@ public class Hotel {
     @Column(name = "plazas_disponibles", nullable = false)
     private Integer plazasDisponibles;
 
-    @ManyToOne
-    @JoinColumn(name = "id_calle", referencedColumnName = "id")
-    private Calle calle;
+    @Column(name = "direccion", nullable = false)
+    private String direccion;
+
+    @Column(name = "ciudad", nullable = false)
+    private String ciudad;
 
     @ManyToOne
     @JoinColumn(name = "cod_admin_general", referencedColumnName = "codigo")

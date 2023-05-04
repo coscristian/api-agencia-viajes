@@ -40,9 +40,11 @@ public class AdminGeneral {
     @OneToMany(mappedBy = "adminGeneral")
     private List<AdminSucursal> administradoresSucursales;
 
-    @ManyToOne
-    @JoinColumn(name = "id_calle", referencedColumnName = "id")
-    private Calle calle;
+    @Column(name = "direccion", nullable = false)
+    private String direccion;
+
+    @Column(name = "ciudad", nullable = false)
+    private String ciudad;
 
     @OneToMany(mappedBy = "adminGeneral")
     private List<Hotel> hoteles;

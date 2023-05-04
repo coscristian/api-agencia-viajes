@@ -12,4 +12,6 @@ public class AdminGeneral {
     private String nombre;
     private String apellidos;
     private String telefono;
+    private String direccion;
+    private String ciudad;
 }
