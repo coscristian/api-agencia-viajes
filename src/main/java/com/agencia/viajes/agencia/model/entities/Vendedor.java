@@ -28,6 +28,9 @@ public class Vendedor {
     @Column(name = "telefono", nullable = false, length = 10)
     private String telefono;
 
+    @Column(name = "activo", nullable = false)
+    private Boolean activo;
+
     @ManyToOne
     @JoinColumn(name = "cod_sucursal", referencedColumnName = "codigo")
     private Sucursal sucursal;

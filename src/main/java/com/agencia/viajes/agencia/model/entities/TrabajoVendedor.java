@@ -29,13 +29,13 @@ public class TrabajoVendedor {
     private Sucursal sucursal;
 
     @Column(name = "fecha_inicio", nullable = false)
-    private Date fechaInicio;
+    private String fechaInicio;
 
     @Column(name = "fecha_fin", nullable = true)
-    private Date fechaFin;
+    private String fechaFin;
 
     @Column(name = "fecha_asignacion", nullable = false)
-    private Date fechaAsignacion;
+    private String fechaAsignacion;
 
     @ManyToOne
     @JoinColumn(name = "cod_admin_general", referencedColumnName = "codigo")

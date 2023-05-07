@@ -1,5 +1,7 @@
 package com.agencia.viajes.agencia.controller;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
@@ -12,10 +14,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.agencia.viajes.agencia.controller.dto.AdminGeneralDto;
 import com.agencia.viajes.agencia.controller.dto.SucursalDto;
 import com.agencia.viajes.agencia.controller.dto.TuristaDto;
+import com.agencia.viajes.agencia.controller.dto.VendedorDto;
+import com.agencia.viajes.agencia.service.AdminGeneralService;
 import com.agencia.viajes.agencia.service.SucursalService;
 import com.agencia.viajes.agencia.service.TuristaService;
+import com.agencia.viajes.agencia.service.VendedorService;
 
 import lombok.AllArgsConstructor;
 
@@ -36,6 +42,8 @@ public class AgenciaViajesController {
 
     private TuristaService turistaService;
     private SucursalService sucursalService;
+    private AdminGeneralService adminGeneralService;
+    private VendedorService vendedorService;
 
     @GetMapping("/turistas") // Petición de tipo GET a esta ruta
     public List<TuristaDto> getAllTuristas(){
@@ -46,6 +54,17 @@ public class AgenciaViajesController {
     public List<SucursalDto> getAllSucursales(){
         return sucursalService.getSucursales();
     }
+
+    @GetMapping("/admins_general")
+    public List<AdminGeneralDto> getAllAdminsGeneral(){
+        return adminGeneralService.getAdminsGeneral();
+    }
+/*
+    @GetMapping("/vendedores")
+    public List<AdminGeneralDto> getAllVendedores(){
+        return
+    }
+    */
     /*
     @GetMapping("/sucursales")
     public List<SucursalDto> getAllSucursales(){
@@ -74,6 +93,22 @@ public class AgenciaViajesController {
         System.out.println(turista.toString());
         //System.out.println(turista.getNombre());
         turistaService.saveTurista(turista);
+        return new ResponseEntity<>("Well done!!", HttpStatus.OK);
+
+    }
+
+    @PostMapping("/vendedor/crear")
+    public ResponseEntity<String> postCrearVendedor(@RequestBody VendedorDto vendedor){
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
+        LocalDateTime now = LocalDateTime.now();  
+        //System.out.println(dtf.format(now));  
+
+        vendedor.setFechaAsignacion(dtf.format(now));
+        System.out.println(vendedor.toString());
+        
+        //System.out.println(turista.getNombre());
+        //turistaService.saveTurista(turista);
+        vendedorService.saveVendedor(vendedor);
         return new ResponseEntity<>("Well done!!", HttpStatus.OK);
 
     }
