@@ -5,14 +5,12 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
+@Data // Permite generar los setter y getter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class VendedorDto {
-    private String codigo;
-    private String nombre, apellidos, telefono;
+public class TrabajoVendedorDto {
+    private String fechaInicio, fechaFin, fechaAsignacion, codigoVendedor, codigoAdminGeneral;
     private Integer codigoSucursal;
-    private String codigoAdminGeneral;
-    private Boolean activo;
 }
+
