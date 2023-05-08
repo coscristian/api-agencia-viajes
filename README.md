@@ -1,6 +1,6 @@
 # api-agencia-viajes
 
 ### Modelo Relacional de la Base de Datos
-![agencia_relational_model](https://user-images.githubusercontent.com/83193118/233818609-5a3e69a4-1bb4-4c36-93d9-bca786c9da0e.png)
+![Captura desde 2023-05-01 18-51-08](https://user-images.githubusercontent.com/83193118/236717263-3aa8048e-a45c-484d-9381-119c299214bc.png)
 
 You can find the **Plant Uml** code [here](doc/agencia_relational_model.md)
