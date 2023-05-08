@@ -2,7 +2,7 @@
 
 Este repositorio almacena el código de la API para el proyecto de la agencia de viajes de la asignatura de Bases de datos
 
-El puerto por defecto para ejecutar el API es el 8080
+El puerto por defecto para ejecutar el API es el **8080**
 
 **Mejoras realizadas:**
 
